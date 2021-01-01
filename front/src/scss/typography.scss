@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "@material/typography/mdc-typography";
+html {
+  --mdc-typography-font-family: "Roboto", sans-serif;
+  --mdc-typography-headline1-font-family: "Oxygen", sans-serif;
+  --mdc-typography-headline2-font-family: "Oxygen", sans-serif;
+  --mdc-typography-headline3-font-family: "Oxygen", sans-serif;
+  --mdc-typography-headline4-font-family: "Oxygen", sans-serif;
+  --mdc-typography-headline5-font-family: "Oxygen", sans-serif;
+  --mdc-typography-headline6-font-family: "Oxygen", sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--mdc-typography-headline1-font-family);
+}

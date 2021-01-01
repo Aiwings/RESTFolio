@@ -4,12 +4,18 @@ from .models import Block, Article
 
 
 class BlockSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for Block Model
+    """
     class Meta:
         model = Block
         fields = ['slug', 'content', 'name']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for user model
+    """
     articles = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Article.objects.all())
 
@@ -19,6 +25,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for Articles model
+    """
     author = serializers.ReadOnlyField(source='author.username')
 
     class Meta:

@@ -130,4 +130,6 @@ dmypy.json
 
 *.cnf
 node_modules
+app/migrations
+.vscode
 settings.ini
