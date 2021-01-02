@@ -1,4 +1,4 @@
-"""djangorestfolio URL Configuration
+"""restfolio URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -19,8 +19,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", TemplateView.as_view(
-        template_name="base.html"
-    )),
+        template_name="application.html",
+    ), name="app"),
     path('admin/', admin.site.urls),
     path('api/', include('app.urls')),
     path('api-auth/', include('rest_framework.urls')),
