@@ -16,8 +16,8 @@ module.exports = {
     config.resolve.alias.set("__STATIC__", "static");
     //config.output.filename("bundle.js");
     config.devServer
-      .public("http://0.0.0.0:8080")
-      .host("0.0.0.0")
+      .public("http://127.0.0.1:8080")
+      .host("127.0.0.1")
       .port(8080)
       .hotOnly(true)
       .watchOptions({ poll: 1000 })
@@ -26,4 +26,11 @@ module.exports = {
       .headers({ "Access-Control-Allow-Origin": ["*"] });
   },
   transpileDependencies: ["vuetify"],
+  // css: {
+  //   loaderOptions: {
+  //     sass: {
+  //       //prependData: `@use "@/scss/index.scss"`,
+  //     },
+  //   },
+  // },
 };
