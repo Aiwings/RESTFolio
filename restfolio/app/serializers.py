@@ -10,6 +10,7 @@ class BlockSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Block
         fields = ['slug', 'content', 'name']
+        lookup_field = 'slug'
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

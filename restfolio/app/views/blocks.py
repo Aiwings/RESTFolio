@@ -20,3 +20,4 @@ class BlockRetrU(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Block.objects.all()
     serializer_class = BlockSerializer
+    lookup_field = "slug"
