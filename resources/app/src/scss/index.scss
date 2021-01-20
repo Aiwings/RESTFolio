@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+$family-sans-serif: "Roboto", sans-serif;
+$family-primary: "Oxygen", sans-serif;
+$family-secondary: "Roboto", sans-serif;
+
+$radius: 10px;
+$radius-large: 20px;
+$radius-rounded: 50%;
+
+$primary: #213159;
+$link: #3d6098;
+$success: #00695c;
+$danger: #880e4f;
+
+.iconsvg {
+  display: inline-block;
+  width: 2.3em;
+  height: 2.3em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/form/_all.sass";
+@import "~bulma/sass/components/modal.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/components/message.sass";
+@import "~bulma/sass/layout/_all.sass";
