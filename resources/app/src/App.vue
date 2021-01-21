@@ -1,7 +1,7 @@
 <template>
-  <NavBar></NavBar>
+  <NavBar @showLogin="toggleLogin"></NavBar>
   <router-view />
-  <Login v-if="showLogin"></Login>
+  <Login :showModal="showLogin" @closeModal="toggleLogin"></Login>
 </template>
 <script>
 import NavBar from "./components/NavBar";
@@ -11,15 +11,17 @@ export default {
     NavBar,
     Login,
   },
-  computed: {
-    showLogin() {
-      return this.$store.getters.isModalShown;
+  computed: {},
+  data() {
+    return {
+      showLogin: false,
+    };
+  },
+  methods: {
+    toggleLogin() {
+      this.showLogin = !this.showLogin;
     },
   },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 <style lang="scss" src="@/scss/index.scss"></style>

@@ -53,7 +53,7 @@ export default {
       this.expanded = !this.expanded;
     },
     clickLogin() {
-      this.$store.commit("toggleModal");
+      this.$emit("showLogin");
     },
   },
 };

@@ -1,9 +1,9 @@
 <template>
-  <Modal title="Connexion à l' API">
+  <Modal title="Connexion à l' API" :show="showModal" @close="close">
     <template v-slot:default>
       <form @submit.prevent="submit">
         <div class="field">
-          <label for="email" class="label"></label>
+          <label for="email" class="label">Adresse Email</label>
           <div class="control has-icons-left">
             <input
               type="email"
@@ -66,6 +66,9 @@
 import Modal from "./Modal";
 import Api from "../api/index";
 export default {
+  props: {
+    showModal: Boolean,
+  },
   data() {
     return {
       email: "",
@@ -83,7 +86,7 @@ export default {
         },
       },
       message: "",
-      messageclass: "",
+      messageclass: "is-hidden",
     };
   },
   components: {
@@ -127,7 +130,7 @@ export default {
         password: this.password,
       };
       try {
-        const request = await Api.post("/api/login", jsonobj);
+        const request = await Api.login(jsonobj);
         let data = await request.json();
 
         if (data.success == true) {
@@ -145,7 +148,7 @@ export default {
       }
     },
     close() {
-      this.$store.commit("toggleModal");
+      this.$emit("closeModal");
     },
   },
 };

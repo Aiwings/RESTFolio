@@ -1,5 +1,5 @@
 <template>
-  <div :class="'modal is-clipped ' + isActive" id="Login">
+  <div :class="'modal is-clipped ' + isActive">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header v-if="title" class="modal-card-head">
@@ -20,16 +20,21 @@
 export default {
   props: {
     title: String,
+    show: Boolean,
   },
-  data() {},
-  computed: {
-    isActive() {
-      return this.$store.getters.isModalShown ? "is-active" : "";
+  watch: {
+    show(ishown) {
+      this.isActive = ishown ? "is-active" : "";
     },
+  },
+  data() {
+    return {
+      isActive: "",
+    };
   },
   methods: {
     close() {
-      this.$store.commit("toggleModal");
+      this.$emit("close");
     },
   },
 };
