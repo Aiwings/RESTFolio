@@ -1,10 +1,10 @@
 <template>
-  <div :class="'modal is-clipped ' + isActive">
+  <div :class="'modal is-clipped ' + isActive" :id="id">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header v-if="title" class="modal-card-head">
         <h4 class="modal-card-title">{{ title }}</h4>
-        <button class="delete" aria-label="close" @click="close"></button>
+        <button class="delete" aria-label="close" @click="close">X</button>
       </header>
       <section class="modal-card-body">
         <slot></slot>
@@ -18,19 +18,11 @@
 
 <script>
 export default {
-  props: {
-    title: String,
-    show: Boolean,
-  },
-  watch: {
-    show(ishown) {
-      this.isActive = ishown ? "is-active" : "";
+  props: ["show", "title", "id"],
+  computed: {
+    isActive() {
+      return this.show ? "is-active" : "";
     },
-  },
-  data() {
-    return {
-      isActive: "",
-    };
   },
   methods: {
     close() {

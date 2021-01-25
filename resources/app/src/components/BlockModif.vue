@@ -1,5 +1,5 @@
 <template>
-  <Modal :title="title" :show="showModal" @close="closeModal">
+  <Modal :title="title" :show="editorShow" @close="closeModal" id="block-modif">
     <template v-slot:default>
       <form @submit.prevent="submit" id="block-modif">
         <div class="field">
@@ -7,18 +7,21 @@
           <div class="control">
             <input
               type="text"
-              :value="name"
-              @input="$emit('update:name', $event.target.value)"
+              :value="modifiedBlock.name"
               placeholder="Nom"
+              @input="changeName($event)"
               class="input"
               required
             />
           </div>
         </div>
-        <quill-editor :value="content" @change="onChange($event)" />
+        <quill-editor
+          :value="modifiedBlock.content"
+          @change="changeContent($event)"
+        />
       </form>
       <div :class="messageClass">
-        <div class="message-body">{{ message }}</div>
+        <div class="message-body">{{ ajaxState.message }}</div>
       </div>
     </template>
     <template v-slot:footer>
@@ -31,54 +34,56 @@
 <script>
 import Modal from "./Modal";
 import { quillEditor } from "vue3-quill";
-
+import { mapState } from "vuex";
 export default {
-  props: {
-    name: String,
-    content: String,
-    created: Boolean,
-    success: Object,
-    showModal: Boolean,
-  },
-  emits: ["update:name", "update:content"],
   components: {
     Modal,
     quillEditor,
   },
   methods: {
     sendEmit() {
-      let block = {};
-      block.name = this.name;
-      block.content = this.content;
-      this.$emit("send", block);
+      this.$store.dispatch("ajaxBlock");
+    },
+    changeName(event) {
+      this.$store.commit("blockName", event.target.value);
+    },
+    changeContent(event) {
+      this.$store.commit("blockContent", event.html);
     },
     closeModal() {
-      this.$emit("closeModif");
+      this.$store.dispatch("closeEdit");
     },
-    onChange(event) {
-      this.$emit("update:content", event.html);
+  },
+  computed: {
+    messageClass() {
+      let className = "message ";
+      if (this.ajaxState.success === true) {
+        className += "is-success";
+      } else if (this.ajaxState.success === false) {
+        className += "is-danger";
+      } else {
+        className += "is-hidden";
+      }
+      return className;
     },
+    name() {
+      return this.modifiedBlock.name;
+    },
+    content() {
+      return this.modifiedBlock.content;
+    },
+    ...mapState(["modifiedBlock", "editorShow", "ajaxState"]),
   },
   data() {
     return {
-      title:
-        (this.created ? "Modification" : "Création") + " du block " + this.name,
-      messageClass: "is-hidden",
-      message: "",
+      title: "Edition du Block",
     };
-  },
-  watch: {
-    success(result) {
-      this.messageClass = "message ";
-      this.messageClass += result.state ? "is-success" : "is-danger";
-      this.message = result.error ? result.error : "Transmission effectuée";
-    },
   },
 };
 </script>
 
 <style>
-main .modal-card {
+#block-modif .modal-card {
   width: 80vw;
 }
 #block-modif .ql-container {

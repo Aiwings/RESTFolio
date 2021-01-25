@@ -1,5 +1,5 @@
 <template>
-  <Modal title="Connexion à l' API" :show="showModal" @close="close">
+  <Modal title="Connexion à l' API" :show="showModal" @close="close" id="login">
     <template v-slot:default>
       <form @submit.prevent="submit">
         <div class="field">
